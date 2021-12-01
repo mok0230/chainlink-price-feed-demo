@@ -10,7 +10,9 @@ async function main() {
   const contract = await ethers.getContractAt(EthUsdTracker.abi, CONTRACT_ADDRESS, signer);
 
   console.log("contract", contract);
-  console.log("contract.hasPriceIncreased()", await contract.hasPriceIncreased());
+
+  // since hasPriceIncreased is not a view function (due to event emitted), need to use callStatic
+  console.log("contract.hasPriceIncreased()", await contract.callStatic.hasPriceIncreased());
 }
 
 main()
