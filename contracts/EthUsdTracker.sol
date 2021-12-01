@@ -15,18 +15,12 @@ contract EthUsdTracker {
   }
 
   function latestPrice() internal view returns (int) {
-    (
-      uint80 roundID, 
-      int price,
-      uint startedAt,
-      uint timeStamp,
-      uint80 answeredInRound
-    ) = priceFeed.latestRoundData();
+    (,int price,,,) = priceFeed.latestRoundData();
 
     return price;
   }
 
-  function hasPriceIncreased() public returns (bool) {
-      
+  function hasPriceIncreased() public view returns (bool) {
+      return latestPrice() > initialPrice;
   }
 }
