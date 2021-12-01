@@ -7,14 +7,14 @@ import "hardhat/console.sol";
 
 contract EthUsdTracker {
   AggregatorV3Interface internal priceFeed;
-  int initialPrice;
+  int public initialPrice;
 
   constructor() {
     priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
     initialPrice = latestPrice();
   }
 
-  function latestPrice() internal view returns (int) {
+  function latestPrice() public view returns (int) {
     (,int price,,,) = priceFeed.latestRoundData();
 
     return price;
