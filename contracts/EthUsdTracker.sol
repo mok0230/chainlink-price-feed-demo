@@ -13,11 +13,11 @@ contract EthUsdTracker {
   constructor() {
     priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
 
-    int price = latestPrice();
+    int currentPrice = latestPrice();
 
-    emit PriceLog("constructor", price);
+    emit PriceLog("constructor", currentPrice);
 
-    initialPrice = price;
+    initialPrice = currentPrice;
   }
 
   function latestPrice() public view returns (int) {
@@ -27,10 +27,10 @@ contract EthUsdTracker {
   }
 
   function hasPriceIncreased() public returns (bool) {
-    int price = latestPrice();
+    int currentPrice = latestPrice();
 
-    emit PriceLog("hasPriceIncreased", price);
+    emit PriceLog("hasPriceIncreased", currentPrice);
 
-    return latestPrice() > initialPrice;
+    return currentPrice > initialPrice;
   }
 }
