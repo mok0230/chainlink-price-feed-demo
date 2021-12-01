@@ -7,11 +7,17 @@ import "hardhat/console.sol";
 
 contract EthUsdTracker {
   AggregatorV3Interface internal priceFeed;
-  int public initialPrice;
+  int initialPrice;
+  event PriceLog(string functionName, int price);
 
   constructor() {
     priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
-    initialPrice = latestPrice();
+
+    int price = latestPrice();
+
+    emit PriceLog("constructor", price);
+
+    initialPrice = price;
   }
 
   function latestPrice() public view returns (int) {
@@ -20,7 +26,11 @@ contract EthUsdTracker {
     return price;
   }
 
-  function hasPriceIncreased() public view returns (bool) {
-      return latestPrice() > initialPrice;
+  function hasPriceIncreased() public returns (bool) {
+    int price = latestPrice();
+
+    emit PriceLog("hasPriceIncreased", price);
+
+    return latestPrice() > initialPrice;
   }
 }
