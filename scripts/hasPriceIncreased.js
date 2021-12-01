@@ -9,7 +9,6 @@ async function main() {
 
   console.log("contract", contract);
   console.log("contract.hasPriceIncreased()", await contract.hasPriceIncreased());
-  console.log("contract.initialPrice()", await contract.initialPrice());
 }
 
 main()
